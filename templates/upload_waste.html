@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Upload Waste Images</title>
+</head>
+<body>
+    <h1>Upload Waste Images</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST" enctype="multipart/form-data">
+        <label for="canal">Select Canal:</label>
+        <select name="canal" id="canal" required>
+            <option value="Canal A">Canal A</option>
+            <option value="Canal B">Canal B</option>
+            <option value="Canal C">Canal C</option>
+        </select><br><br>
+        <input type="file" name="images" multiple><br><br>
+        <button type="submit">Upload Images</button>
+    </form>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+</body>
+</html>

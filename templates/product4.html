@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaClense 4.0 - Stagnant Solutions</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .navbar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        .section {
+            padding: 6rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .section h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        .qa {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .qa strong {
+            color: #2c3e50;
+        }
+        .image-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .form-container input[type="email"] {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 250px;
+            margin-right: 1rem;
+        }
+        .form-container button {
+            padding: 0.5rem 1rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .form-container button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .form-container p {
+            color: #777;
+            font-style: italic;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const button = document.getElementById('price_button');
+            button.disabled = !email.includes('@');
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('dashboard') }}">Home</a>
+        <a href="{{ url_for('reports') }}">Reports</a>
+        <a href="{{ url_for('buy_sell') }}">Buy/Sell</a>
+        <a href="{{ url_for('recycling_measures') }}">Recycling Measures</a>
+    </div>
+    <div class="section">
+        <h1>AquaClense 4.0 - Stagnant Solutions</h1>
+        <p>
+            AquaClense 4.0 is engineered for the toughest challenge: water bodies with no natural flow. In stagnant canals, ponds, and reservoirs, waste accumulates relentlessly, choking ecosystems. Our solution uses innovative suction and filtration to clear debris where water refuses to move, offering a lifeline to neglected aquatic environments.
+        </p>
+
+        <h2>Why Stagnant Water Needs AquaClense 4.0</h2>
+        <p>
+            Stagnant water is a silent crisis—waste sits, festers, and multiplies, turning vital resources into health hazards. AquaClense 4.0 steps in where nature stalls, deploying a low-energy suction system tailored to canal lengths. But why should you care? Here’s why:
+        </p>
+        <div class="qa">
+            <p><strong>Q: What happens in stagnant water without intervention?</strong><br>A: Plastic and organic waste pile up, breeding bacteria and releasing toxins—up to 80% of urban stagnant water bodies are polluted beyond recovery.</p>
+            <p><strong>Q: Can’t we just wait for rain or flow?</strong><br>A: No—stagnation persists in dry seasons, and waiting means losing ecosystems. Every day counts!</p>
+            <p><strong>Q: Why choose AquaClense 4.0?</strong><br>A: It’s the only system designed for zero-flow zones, clearing waste fast and efficiently—before it’s too late.</p>
+        </div>
+        <p>
+            Don’t let stagnation win. AquaClense 4.0 is your answer—act now, or watch your water turn to waste.
+        </p>
+
+        <h2>Features That Deliver</h2>
+        <p>
+            AquaClense 4.0 adapts to any canal length with a modular suction array, pulling waste into a high-capacity filtration bin. Powered by a minimal-energy pump, it’s built for efficiency and durability. Customizable to your site, it ensures no corner of stagnant water stays untouched. From plastic bottles to microplastics, it captures it all—silently, relentlessly, and without relying on flow.
+        </p>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='aquaclense_4.0.jpg') }}" alt="AquaClense 4.0">
+            <p>AquaClense 4.0: Conquering Stagnation</p>
+        </div>
+
+        <div class="form-container">
+            <h2>Get Your Quote Now</h2>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="POST">
+                <label for="email">Enter Email Address:</label>
+                <input type="email" id="email" name="email" oninput="validateForm()" required>
+                <button type="submit" id="price_button" disabled>Get Best Price</button>
+            </form>
+            <p>Note: Price details will be emailed to you.</p>
+        </div>
+    </div>
+</body>
+</html>

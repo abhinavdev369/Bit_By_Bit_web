@@ -1,0 +1,56 @@
+<!-- c:\proj1\templates\wdp.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Data Processing - Aquaclense</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .data-container { max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .flash { color: red; text-align: center; }
+        .calendar { text-align: center; margin-bottom: 20px; }
+        input[type="date"] { padding: 5px; font-size: 16px; }
+    </style>
+</head>
+<body>
+    <div class="data-container">
+        <h1>Water Data Processing</h1>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p class="flash">{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div class="calendar">
+            <form method="POST" action="{{ url_for('wdp') }}">
+                <label for="selected_date">Select Date: </label>
+                <input type="date" id="selected_date" name="selected_date" value="{{ selected_date|default(today_date) }}" required>
+                <button type="submit">Show Data</button>
+            </form>
+        </div>
+        {% if sample_id is defined %}
+        <table>
+            <tr><th>Sample ID</th><td>{{ sample_id }}</td></tr>
+            <tr><th>Dissolved Oxygen (D0, mg/L)</th><td>{{ d0 }}</td></tr>
+            <tr><th>D5 (mg/L)</th><td>{{ d5 }}</td></tr>
+            <tr><th>Temperature (°C)</th><td>{{ temperature }}</td></tr>
+            <tr><th>Turbidity (NTU)</th><td>{{ turbidity }}</td></tr>
+            <tr><th>pH</th><td>{{ ph }}</td></tr>
+            <tr><th>Conductivity (µS/cm)</th><td>{{ conductivity }}</td></tr>
+            <tr><th>BOD (mg/L)</th><td>{{ bod }}</td></tr>
+            <tr><th>Category</th><td>{{ category }}</td></tr>
+            <tr><th>Health Risk</th><td>{{ health_risk }}</td></tr>
+            <tr><th>Possible Diseases</th><td>{{ diseases|join(', ') }}</td></tr>
+            <tr><th>Solutions</th><td>{{ solutions|join('<br>')|safe }}</td></tr>
+        </table>
+        {% endif %}
+        <p><a href="{{ url_for('dashboard') }}">Back to Dashboard</a></p>
+    </div>
+</body>
+</html>

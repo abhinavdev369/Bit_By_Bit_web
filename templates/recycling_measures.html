@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recycling Measures - AquaClense</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .navbar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        .section {
+            padding: 6rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .section h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        .section ul {
+            list-style-type: disc;
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .section ul li {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+        .graph-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .graph-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .graph-container p {
+            font-style: italic;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('dashboard') }}">Home</a>
+        <a href="{{ url_for('reports') }}">Reports</a>
+        <a href="{{ url_for('buy_sell') }}">Buy/Sell</a>
+        <a href="{{ url_for('recycling_measures') }}">Recycling Measures</a>
+    </div>
+    <div class="section">
+        <h1>Recycling Measures: A Path to Sustainability</h1>
+        <p>
+            At AquaClense, we believe that waste is not the end—it’s the beginning of a new cycle. Our mission extends beyond purification to empowering communities with the knowledge and tools to manage recyclable waste effectively. This report delves into the recyclability of common waste types—plastic, shoes, and metal—and offers actionable insights based on past data to address high waste generation. Together, we can transform waste into a resource for a cleaner, greener future.
+        </p>
+
+        <h2>The Recyclable Trio: Plastic, Shoes, and Metal</h2>
+        <p>
+            Waste management begins with understanding what we discard. Plastic, shoes, and metal are among the most prevalent waste categories, each with unique recycling potential. Plastic, omnipresent in modern life, can be melted and reshaped into new products, from packaging to furniture. Shoes, often discarded prematurely, contain recyclable materials like rubber and leather that can be repurposed into playground surfaces or insulation. Metal, a durable and infinitely recyclable resource, powers industries when reclaimed, reducing the need for virgin ore mining.
+        </p>
+        <p>
+            Yet, their potential remains untapped when waste generation outpaces recycling efforts. Our past data reveals alarming trends in these categories, urging immediate action to curb their environmental impact.
+        </p>
+
+        <h2>Past Waste Data: A Wake-Up Call</h2>
+        <p>
+            Historical data from AquaClense’s waste tracking system highlights the scale of the challenge. In 2024 alone, our platform recorded a 35% increase in plastic waste generation compared to 2023, with an average of 12 tons collected monthly across monitored canals. Shoe waste spiked by 20%, reflecting seasonal disposal patterns, while metal waste remained steady but substantial at 8 tons monthly. These figures underscore the urgency of proactive recycling measures.
+        </p>
+        <div class="graph-container">
+            <img src="{{ url_for('static', filename='waste_trends_2024.jpg') }}" alt="Waste Trends 2024">
+            <p>Figure 1: Monthly Waste Generation Trends (2024)</p>
+        </div>
+
+        <h2>Awareness and Action: What to Do</h2>
+        <p>
+            High generation of plastic, shoes, and metal waste signals a need for both individual and collective responsibility. Here’s what we recommend based on our survey insights:
+        </p>
+        <ul>
+            <li><strong>Plastic Overload:</strong> If plastic waste exceeds sustainable levels (e.g., >5 tons/month in a community), prioritize reduction by switching to reusable alternatives like cloth bags and stainless steel bottles. Recycle diligently—separate plastics by type (PET, HDPE) to maximize repurposing efficiency.</li>
+            <li><strong>Shoe Surplus:</strong> For high shoe waste, launch donation drives before disposal—many discarded pairs are still wearable. For non-usable shoes, partner with recycling programs to extract rubber and fabric, reducing landfill burden.</li>
+            <li><strong>Metal Excess:</strong> When metal waste peaks (e.g., >8 tons/month), establish local scrap collection points. Encourage businesses to sell excess metal through AquaClense’s marketplace, turning waste into profit while conserving resources.</li>
+        </ul>
+        <p>
+            These measures aren’t just suggestions—they’re imperatives. Our data shows that communities adopting such strategies reduced waste accumulation by up to 25% within six months.
+        </p>
+        <div class="graph-container">
+            <img src="{{ url_for('static', filename='waste_reduction_2024.jpg') }}" alt="Waste Reduction Impact">
+            <p>Figure 2: Impact of Recycling Measures on Waste Reduction (2024)</p>
+        </div>
+
+        <h2>Join the Recycling Revolution</h2>
+        <p>
+            AquaClense isn’t just about managing waste—it’s about reimagining it. By understanding the recyclability of plastic, shoes, and metal, and acting on data-driven insights, we can turn a growing problem into a thriving opportunity. Whether you’re reducing, reusing, or recycling, every step counts. Let’s build a sustainable tomorrow, one waste item at a time.
+        </p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select Date and Canal</title>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <style>
+        #datepicker { margin: 20px; }
+        #canal-select { display: none; margin: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Select a Date and Canal</h1>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    <form method="POST" action="{{ url_for('reports') }}">
+        <div id="datepicker"></div>
+        <input type="hidden" name="date" id="date-input">
+        <select name="canal" id="canal-select">
+            <option value="Canal A">Canal A</option>
+            <option value="Canal B">Canal B</option>
+            <option value="Canal C">Canal C</option>
+        </select>
+        <button type="submit" id="submit-btn" style="display: none;">View Report</button>
+    </form>
+    <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+
+    <script>
+    $(function() {
+        $("#datepicker").datepicker({
+            dateFormat: "yy-mm-dd",
+            onSelect: function(dateText) {
+                $("#date-input").val(dateText);
+                $("#canal-select").show();
+                $("#submit-btn").show();
+            }
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% block head %}
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+{% endblock %}
+{% block content %}
+<div class="admin-container">
+    <div class="admin-content">
+        <h1>Welcome, Admin {{ session['user'] }}!</h1>
+        <p>You have successfully logged in to the admin dashboard.</p>
+        {% if heatmap_url %}
+            <h2>Admin Activity Heatmap</h2>
+            <img src="{{ heatmap_url }}" alt="Heatmap">
+        {% else %}
+            <p>No data available for heatmap.</p>
+        {% endif %}
+        <p>Admin Functions:</p>
+        <ul>
+            <li>View all users (future feature).</li>
+            <li>Manage permissions (future feature).</li>
+        </ul>
+        <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+    </div>
+</div>
+
+<style>
+.admin-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a2e;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.admin-content {
+    text-align: center;
+    padding: 2rem;
+    background: #2e2e4e;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+h1 {
+    font-weight: 700;
+    color: #ffffff;
+}
+
+p {
+    font-weight: 400;
+    color: #d3d3d3;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin: 0.5em 0;
+    color: #d3d3d3;
+}
+
+.logout-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: #dc3545;
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s ease;
+    font-weight: 500;
+}
+
+.logout-btn:hover {
+    background: #b02a37;
+}
+</style>
+{% endblock %}

@@ -1,0 +1,849 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquaclense Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: rgba(17, 24, 39, 1);
+            --primary-dark: #1976D2;
+            --primary-light: #BBDEFB;
+            --secondary: #00BCD4;
+            --dark: #263238;
+            --light: #ECEFF1;
+            --success: #4CAF50;
+            --warning: #FFC107;
+            --danger: #F44336;
+            --gray: #607D8B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #f8fafc;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        .navbar {
+            background-color: white;
+            padding: 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            padding: 0.8rem 2rem;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-right: 1rem;
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .nav-links {
+            display: flex;
+            margin-right: 2rem;
+        }
+
+        .nav-item {
+            position: relative;
+        }
+
+        .nav-link {
+            color: var(--dark);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 1.5rem 1.2rem;
+            display: block;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 70%;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            z-index: 1;
+            top: 100%;
+            left: 0;
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-content a {
+            color: var(--dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+
+        .dropdown-content a:hover {
+            background-color: #f5f9ff;
+            color: var(--primary);
+            padding-left: 20px;
+        }
+
+        .nav-item:hover .dropdown-content {
+            display: block;
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 8rem 2rem 6rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .hero-text {
+            flex: 0 0 50%;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: 0;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin: 1.5rem 0;
+            opacity: 0.9;
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: white;
+            color: var(--primary);
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            margin-top: 1rem;
+        }
+
+        .hero-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.2);
+        }
+
+        .hero-image {
+            flex: 0 0 45%;
+            text-align: right;
+            position: relative;
+        }
+
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M321.39 56.44c58-10.79 114.16-30.13 172-41.86 82.39-16.72 168.19-17.73 250.45-.39C823.78 31 906.67 72 985.66 92.83c70.05 18.48 146.53 26.09 214.34 3V0H0v27.35a600.21 600.21 0 00321.39 29.09z" fill="%23f8fafc"/></svg>');
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        /* Section */
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-lead {
+            font-size: 1.1rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Features */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .feature-icon {
+            background-color: var(--primary-light);
+            color: var(--primary);
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .feature-content {
+            padding: 1.5rem;
+        }
+
+        .feature-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .feature-text {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Upload Form */
+        .upload-container {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-top: 3rem;
+        }
+
+        .upload-title {
+            font-size: 1.5rem;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .upload-title::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary);
+            bottom: -10px;
+            left: 0;
+        }
+
+        .form-row {
+            margin-bottom: 1.5rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(33, 150, 243, 0.1);
+            outline: none;
+        }
+
+        .file-input-container {
+            position: relative;
+            width: 100%;
+            height: 120px;
+            border: 2px dashed #ddd;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .file-input-container:hover {
+            border-color: var(--primary);
+            background-color: rgba(33, 150, 243, 0.02);
+        }
+
+        .file-input-label {
+            color: var(--gray);
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        #images {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        .upload-btn {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.8rem 2rem;
+            border-radius: 4px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.95rem;
+        }
+
+        .upload-btn:hover {
+            background-color: var(--primary-dark);
+        }
+
+        /* Marketplace */
+        .marketplace {
+            background-color: #f1f8ff;
+            padding: 5rem 2rem;
+            margin-top: 4rem;
+        }
+
+        .marketplace-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .marketplace-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .market-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .market-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .market-icon {
+            height: 160px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: var(--primary);
+        }
+
+        .market-content {
+            padding: 1.5rem;
+        }
+
+        .market-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .market-text {
+            color: var(--gray);
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .market-link {
+            display: inline-block;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .market-link:hover {
+            color: var(--primary-dark);
+            transform: translateX(5px);
+        }
+
+        /* Footer */
+        .footer {
+            background-color: var(--dark);
+            color: #ddd;
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .footer-text {
+            color: #aaa;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-title {
+            font-size: 1.1rem;
+            color: white;
+            margin-bottom: 1.2rem;
+            font-weight: 600;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 3rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media screen and (max-width: 991px) {
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text, .hero-image {
+                flex: 0 0 100%;
+            }
+
+            .hero-image {
+                margin-top: 2rem;
+                text-align: center;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .section {
+                padding: 3rem 1.5rem;
+            }
+
+            .hero {
+                padding: 7rem 1.5rem 5rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .section h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <div class="logo"><i class="fas fa-water"></i></div>
+            <div class="logo-text">Aquaclense</div>
+        </div>
+        <div class="nav-links">
+            <div class="nav-item">
+                <a href="{{ url_for('dashboard') }}" class="nav-link">Home</a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">Products</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('product1') }}">AquaClense 1.0</a>
+                    <a href="{{ url_for('product2') }}">AquaClense 2.0</a>
+                    <a href="{{ url_for('product3') }}">AquaClense 3.0</a>
+                    <a href="{{ url_for('product4') }}">AquaClense 4.0</a>
+                </div>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url_for('reports') }}" class="nav-link">Reports</a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url_for('wdp') }}" class="nav-link">WDP</a>
+            </div>
+            <div class="nav-item">
+                <a href="{{ url_for('recycling_measures') }}" class="nav-link">Recycling</a>
+            </div>
+            <div class="nav-item">
+                <a href="#" class="nav-link">Marketplace</a>
+                <div class="dropdown-content">
+                    <a href="{{ url_for('buy') }}">Buy Waste</a>
+                    <a href="{{ url_for('sell') }}">Sell Waste</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Welcome to Aquaclense</h1>
+                <p>Revolutionizing water purification with innovative solutions for a cleaner, sustainable future.</p>
+                <a href="#" class="hero-btn">Learn More</a>
+            </div>
+            <div class="hero-image">
+                <img src="/static/aquaclense_tech.jpg" alt="Aquaclense Technology">
+            </div>
+        </div>
+        <div class="wave"></div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>What's Aquaclense</h2>
+            <p class="section-lead">Aquaclense is an innovative water purification solution designed to provide clean, safe drinking water for households and communities.</p>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-tint"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Advanced Filtration</h3>
+                    <p class="feature-text">Using cutting-edge technology to remove impurities and contaminants, ensuring every drop is pure and refreshing.</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-leaf"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Eco-Friendly</h3>
+                    <p class="feature-text">Sustainable solutions that protect our environment while providing clean water for generations to come.</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-globe-americas"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Global Impact</h3>
+                    <p class="feature-text">Join our mission to make clean water accessible to communities around the world.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="upload-container">
+            <h3 class="upload-title">Upload Waste Images</h3>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            
+            <form method="POST" action="{{ url_for('upload_waste_images') }}" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date" class="form-label">Date:</label>
+                        <input type="date" name="date" id="date" class="form-control" required value="{{ today }}">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="canal" class="form-label">Select Canal:</label>
+                        <select name="canal" id="canal" class="form-control" required>
+                            <option value="Canal A">Canal A</option>
+                            <option value="Canal B">Canal B</option>
+                            <option value="Canal C">Canal C</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Upload Images:</label>
+                    <div class="file-input-container">
+                        <i class="fas fa-cloud-upload-alt" style="font-size: 2rem; color: #ddd;"></i>
+                        <span class="file-input-label">Drag & drop files or click to browse</span>
+                        <input type="file" name="images" id="images" multiple accept="image/*" required>
+                    </div>
+                </div>
+                
+                <button type="submit" class="upload-btn">Upload Images</button>
+            </form>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="section-header">
+            <h2>Our Vision and Mission</h2>
+        </div>
+        
+        <div class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-eye"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Vision</h3>
+                    <p class="feature-text">To create a world where everyone has access to clean, sustainable water resources, fostering health and well-being for generations to come.</p>
+                </div>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-bullseye"></i>
+                </div>
+                <div class="feature-content">
+                    <h3 class="feature-title">Mission</h3>
+                    <p class="feature-text">We are committed to developing cutting-edge water purification technologies, promoting environmental stewardship, and empowering communities through education and innovation.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="marketplace">
+        <div class="marketplace-inner">
+            <div class="section-header">
+                <h2>Waste Marketplace</h2>
+                <p class="section-lead">AquaClense is not just a waste management platform—we are revolutionizing the way waste is bought and sold!</p>
+            </div>
+            
+            <div class="marketplace-cards">
+                <div class="market-card">
+                    <div class="market-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="market-content">
+                        <h3 class="market-title">Buy Waste</h3>
+                        <p class="market-text">Find quality recyclable materials for your business needs. Direct transactions with verified sellers.</p>
+                        <a href="{{ url_for('buy') }}" class="market-link">Explore Marketplace <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="market-card">
+                    <div class="market-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="market-content">
+                        <h3 class="market-title">Sell Waste</h3>
+                        <p class="market-text">Turn your waste into profit. Connect with buyers looking for your recyclable materials.</p>
+                        <a href="{{ url_for('sell') }}" class="market-link">Start Selling <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                
+                <div class="market-card">
+                    <div class="market-icon">
+                        <i class="fas fa-recycle"></i>
+                    </div>
+                    <div class="market-content">
+                        <h3 class="market-title">Recycling Measures</h3>
+                        <p class="market-text">Track your environmental impact and contribute to a cleaner future with our advanced metrics.</p>
+                        <a href="{{ url_for('recycling_measures') }}" class="market-link">View Metrics <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <div class="footer-logo"><i class="fas fa-water"></i> Aquaclense</div>
+                <p class="footer-text">Revolutionizing water purification with innovative solutions for a cleaner, sustainable future.</p>
+            </div>
+            
+            <div>
+                <h4 class="footer-title">Products</h4>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('product1') }}">AquaClense 1.0</a></li>
+                    <li><a href="{{ url_for('product2') }}">AquaClense 2.0</a></li>
+                    <li><a href="{{ url_for('product3') }}">AquaClense 3.0</a></li>
+                    <li><a href="{{ url_for('product4') }}">AquaClense 4.0</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="footer-title">Quick Links</h4>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('dashboard') }}">Home</a></li>
+                    <li><a href="{{ url_for('reports') }}">Reports</a></li>
+                    <li><a href="{{ url_for('wdp') }}">WDP</a></li>
+                    <li><a href="{{ url_for('recycling_measures') }}">Recycling Measures</a></li>
+                </ul>
+            </div>
+            
+            <div>
+                <h4 class="footer-title">Marketplace</h4>
+                <ul class="footer-links">
+                    <li><a href="{{ url_for('buy') }}">Buy Waste</a></li>
+                    <li><a href="{{ url_for('sell') }}">Sell Waste</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2025 Aquaclense. All rights reserved.
+        </div>
+    </footer>
+</body>
+</html>

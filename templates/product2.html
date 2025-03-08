@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaClense 2.0 - The Revolution</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-color: #f0f4f8;
+            color: #333;
+        }
+        .navbar {
+            background-color: #2c3e50;
+            padding: 1rem 0;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .navbar a {
+            color: #ecf0f1;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        .section {
+            padding: 6rem 2rem 4rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .section h1 {
+            font-size: 2.5rem;
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .section h2 {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+        .section p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+        .qa {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        .qa strong {
+            color: #2c3e50;
+        }
+        .image-container {
+            text-align: center;
+            margin: 2rem 0;
+        }
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .form-container {
+            text-align: center;
+            margin-top: 2rem;
+        }
+        .form-container input[type="email"] {
+            padding: 0.5rem;
+            font-size: 1rem;
+            width: 250px;
+            margin-right: 1rem;
+        }
+        .form-container button {
+            padding: 0.5rem 1rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        .form-container button:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+        .form-container p {
+            color: #777;
+            font-style: italic;
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const button = document.getElementById('price_button');
+            button.disabled = !email.includes('@');
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('dashboard') }}">Home</a>
+        <a href="{{ url_for('reports') }}">Reports</a>
+        <a href="{{ url_for('buy_sell') }}">Buy/Sell</a>
+        <a href="{{ url_for('recycling_measures') }}">Recycling Measures</a>
+    </div>
+    <div class="section">
+        <h1>AquaClense 2.0 - The Revolution</h1>
+        <p>
+            AquaClense 2.0 heralds a groundbreaking revolution in oceanic waste management. Unlike any other solution, this product harnesses the natural power of ocean waves to collect waste efficiently. As waves crash against our shores, they bring with them a tide of debris—plastic, metal, and more. AquaClense 2.0 turns this relentless force into an ally, capturing waste where it’s most abundant and most destructive: our oceans.
+        </p>
+
+        <h2>Why Oceans Matter—And Why You Should Act Now</h2>
+        <p>
+            Oceans cover over 70% of our planet, yet they’re drowning in pollution. Every year, millions of tons of waste wash into these vital ecosystems, threatening marine life, disrupting food chains, and poisoning the very water we depend on. AquaClense 2.0 isn’t just a product—it’s a desperate call to action. Consider these urgent questions:
+        </p>
+        <div class="qa">
+            <p><strong>Q: How much waste enters our oceans daily?</strong><br>A: Over 20 million pounds—enough to fill 1,000 garbage trucks every single day.</p>
+            <p><strong>Q: What happens if we don’t act?</strong><br>A: By 2050, plastic could outweigh fish in the ocean, leaving ecosystems in ruins and seafood unsafe.</p>
+            <p><strong>Q: Can we afford to wait?</strong><br>A: No. Every minute lost is another wave of waste crashing in—there’s no time left for hesitation.</p>
+        </div>
+        <p>
+            With oceans spiraling into chaos, AquaClense 2.0 is the lifeline we can’t ignore. It’s not just a solution—it’s the only way forward.
+        </p>
+
+        <h2>The Comeback Solution to Problems</h2>
+        <p>
+            AquaClense 2.0 redefines efficiency with a setup so ingenious, it needs no motor for suction. Waves hit a spring-based flap mechanism, which opens effortlessly to let waste fall into a filter-like bin below. From there, a conveyor belt—powered by a low-energy, electricity-sipping motor—lifts the debris into a collection bin above. This minimalist design slashes power costs and maintenance, making it ever-lasting and supremely efficient. We’ve widened the setup to capture more waste with every wave, ensuring maximum collection without compromise.
+        </p>
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='aquaclense_2.0.jpg') }}" alt="AquaClense 2.0">
+            <p>AquaClense 2.0: Harnessing Waves to Clean Oceans</p>
+        </div>
+
+        <h2>A Lifeline for Our Oceans</h2>
+        <p>
+            Oceans aren’t just water—they’re the heartbeat of life on Earth. They regulate climate, feed billions, and sustain biodiversity. Yet, they’re under siege, choked by waste that manual efforts can’t keep up with. AquaClense 2.0 changes that. Its wave-powered, low-energy design delivers unmatched efficiency, clearing vast swathes of debris without the heavy footprint of traditional systems. This isn’t just a product—it’s a revolution that restores our oceans, protects our future, and turns a global crisis into an opportunity for renewal.
+        </p>
+
+        <div class="form-container">
+            <h2>Get Your Quote Today</h2>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <p>{{ message }}</p>
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <form method="POST">
+                <label for="email">Enter Email Address:</label>
+                <input type="email" id="email" name="email" oninput="validateForm()" required>
+                <button type="submit" id="price_button" disabled>Get Best Price</button>
+            </form>
+            <p>Note: Price details will be emailed to you.</p>
+        </div>
+    </div>
+</body>
+</html>

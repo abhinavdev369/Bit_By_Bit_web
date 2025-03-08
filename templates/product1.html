@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AquaClense 1.0 - The Beginning</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: rgba(17, 24, 39, 1);
+            --primary-dark: #1976D2;
+            --primary-light: #BBDEFB;
+            --secondary: #00BCD4;
+            --dark: #263238;
+            --light: #ECEFF1;
+            --success: #4CAF50;
+            --warning: #FFC107;
+            --danger: #F44336;
+            --gray: #607D8B;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+        
+        .navbar {
+            background-color: var(--primary);
+            padding: 1rem 2rem;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            color: white;
+            font-weight: 600;
+            font-size: 1.5rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        
+        .logo span {
+            color: var(--secondary);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+        }
+        
+        .navbar a:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--secondary);
+        }
+        
+        .header {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+        
+        .header p {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .section {
+            padding: 5rem 2rem;
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--secondary);
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .feature {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-content {
+            padding: 2rem;
+        }
+        
+        .feature h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .feature p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .image-container {
+            text-align: center;
+            margin: 3rem 0;
+        }
+        
+        .image-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+        }
+        
+        .image-caption {
+            margin-top: 1rem;
+            font-style: italic;
+            color: var(--gray);
+        }
+        
+        .cta-section {
+            background-color: var(--primary-light);
+            padding: 5rem 2rem;
+            text-align: center;
+            margin-top: 3rem;
+            border-radius: 8px;
+        }
+        
+        .cta-section h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-container {
+            max-width: 500px;
+            margin: 2rem auto;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--primary);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--secondary);
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.1);
+        }
+        
+        .btn {
+            padding: 1rem 2.5rem;
+            background-color: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .btn:hover {
+            background-color: #00ACC1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn:disabled {
+            background-color: var(--gray);
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .form-note {
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-top: 1rem;
+        }
+        
+        .flash-message {
+            padding: 1rem;
+            background-color: var(--success);
+            color: white;
+            border-radius: 4px;
+            margin-bottom: 1.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-links {
+                gap: 1rem;
+            }
+            
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+                padding: 1rem;
+            }
+        }
+    </style>
+    <script>
+        function validateForm() {
+            const email = document.getElementById('email').value;
+            const button = document.getElementById('price_button');
+            button.disabled = !email.includes('@'); // Enable only if '@' is present
+        }
+    </script>
+</head>
+<body>
+    <div class="navbar">
+        <a href="{{ url_for('dashboard') }}" class="logo">Aqua<span>Clense</span></a>
+        <div class="nav-links">
+            <a href="{{ url_for('dashboard') }}">Home</a>
+            <a href="{{ url_for('reports') }}">Reports</a>
+            <a href="{{ url_for('buy_sell') }}">Buy/Sell</a>
+            <a href="{{ url_for('recycling_measures') }}">Recycling Measures</a>
+        </div>
+    </div>
+    
+    <div class="header">
+        <h1>AquaClense 1.0 - The Beginning</h1>
+        <p>
+            A revolutionary solution for effective and affordable waste management in water bodies and canals
+        </p>
+    </div>
+    
+    <div class="section">
+        <h2 class="section-title">Revolutionizing Waste Management</h2>
+        <p>
+            AquaClense 1.0 marks the dawn of a revolutionary era in waste management, targeting the heart of the problem—canals and water bodies. These neglected arteries of our planet are where waste accumulates most aggressively, choking ecosystems and threatening communities. Our solution is engineered to tackle this crisis head-on, focusing on efficiency, innovation, and affordability.
+        </p>
+        
+        <div class="feature-grid">
+            <div class="feature">
+                <div class="feature-content">
+                    <h2>A Game-Changer for Canals and Water Bodies</h2>
+                    <p>
+                        AquaClense 1.0 is not just a product—it's a vision brought to life. Designed specifically for canals and water bodies, it addresses the rampant waste buildup that traditional methods fail to manage. At its core is a powerful suction pump that effortlessly extracts waste—plastic, shoes, metal, and more—depositing it into a sturdy holding bin. From there, our cost-effective removal system kicks in: a simple shovel clears the bin, ensuring operational simplicity without breaking the bank. For height adjustments, a manual pulley system offers precision and control, adaptable to any canal depth.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="feature">
+                <div class="feature-content">
+                    <h2>Evolving to AquaClense 1.1</h2>
+                    <p>
+                        Looking ahead, AquaClense 1.1 takes innovation further. For regions where manual pulleys prove labor-intensive, we introduce a conveyor belt system paired with a motorized, sensor-controlled automatic pulley. This upgrade minimizes human effort, maximizes efficiency, and ensures waste removal is seamless, even in the most challenging environments. Imagine a system so intuitive it anticipates waste levels and adjusts itself— that's the future we're building.
+                    </p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="image-container">
+            <img src="/static/aquaclense_1.1.jpg" alt="AquaClense 1.1">
+            <p class="image-caption">AquaClense 1.1: The Next Evolution in Waste Management</p>
+        </div>
+        
+        <h2 class="section-title">Global Impact, Local Solutions</h2>
+        <p>
+            In countries like Malaysia, where canals and rivers such as the Klang River and Malacca River drown under heaps of waste, AquaClense shines as a beacon of hope. With electricity costs in these regions being remarkably low, our solution leverages this advantage to deliver unmatched efficiency. The suction pump and motorized pulley operate at minimal expense, making AquaClense a financially viable choice for governments and businesses alike. This isn't just a product—it's a lifeline for communities suffocating under waste, transforming polluted waterways into thriving ecosystems once more.
+        </p>
+        
+        <div class="feature">
+            <div class="feature-content">
+                <h2>The AquaClense Advantage</h2>
+                <p>
+                    Investing in AquaClense 1.0 and its 1.1 evolution isn't just a financial decision—it's a stake in the future. By replacing backbreaking manual labor with a smart, automated system, we slash operational costs by up to 60% compared to traditional methods. The suction pump's relentless efficiency clears waste faster than any human crew, while the bin-and-shovel approach—or the advanced conveyor belt—ensures scalability without complexity. In regions plagued by canal waste, AquaClense delivers results that speak louder than promises: cleaner water, healthier communities, and a profitable return on investment. This is your chance to back a product that doesn't just solve a problem—it redefines the industry.
+                </p>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>Request Your Personalized Quote</h2>
+            <div class="form-container">
+                {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="flash-message">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+                {% endwith %}
+                <form method="POST">
+                    <div class="form-group">
+                        <label for="email">Business Email Address</label>
+                        <input type="email" id="email" name="email" class="form-control" oninput="validateForm()" required placeholder="your.email@company.com">
+                    </div>
+                    <button type="submit" id="price_button" class="btn" disabled>Request Pricing</button>
+                </form>
+                <p class="form-note">You'll receive a comprehensive quote with pricing details, implementation timeline, and ROI analysis.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

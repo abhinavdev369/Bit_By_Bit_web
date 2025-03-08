@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Waste Report for {{ date }}</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        .graph-container { margin: 20px 0; }
+    </style>
+</head>
+<body>
+    <h1>Waste Report for {{ date }}</h1>
+    <div id="graph-canal-a" class="graph-container"></div>
+    <div id="graph-canal-b" class="graph-container"></div>
+    <div id="graph-canal-c" class="graph-container"></div>
+    <a href="{{ url_for('reports') }}">Back to Selection</a>
+
+    <script>
+    // Safely embed canal_data from Flask into JavaScript
+    var canalData = {{ canal_data | tojson | safe }};
+    // Ensure canalData is defined and not null
+    if (canalData) {
+        console.log('Canal data loaded successfully.');
+    } else {
+        console.error('Failed to load canal data.');
+    }
+    // Function to plot a graph for a canal
+    function plotCanalGraph(canalName, divId) {
+        var wasteData = canalData[canalName] || {};
+        if (Object.keys(wasteData).length > 0) {
+            var wasteTypes = Object.keys(wasteData);
+            var counts = Object.values(wasteData);
+
+            var trace = {
+                x: wasteTypes,
+                y: counts,
+                type: 'scatter',
+                mode: 'lines+markers',
+                name: canalName,
+                line: { shape: 'linear' }
+            };
+
+            var layout = {
+                title: 'Waste Counts for ' + canalName + ' on {{ date }}',
+                xaxis: { title: 'Waste Type' },
+                yaxis: { title: 'Count' },
+                height: 400
+            };
+
+            Plotly.newPlot(divId, [trace], layout);
+        } else {
+            document.getElementById(divId).innerHTML = '<p>No data available for ' + canalName + '.</p>';
+        }
+    }
+
+    // Plot graphs for each canal
+    plotCanalGraph('Canal A', 'graph-canal-a');
+    plotCanalGraph('Canal B', 'graph-canal-b');
+    plotCanalGraph('Canal C', 'graph-canal-c');
+    </script>
+</body>
+</html>
