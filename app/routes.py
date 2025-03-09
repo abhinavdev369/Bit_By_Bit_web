@@ -28,10 +28,10 @@ GMAIL_EMAIL = "yourrealemail@gmail.com"
 GMAIL_PASSWORD = "yourapppassword"
 
 # MongoDB collections
-from database import get_users_collection, get_admins_collection, get_canal_data_collection
-users_collection = get_users_collection()
-admins_collection = get_admins_collection()
-canal_data_collection = get_canal_data_collection()
+# from database import get_users_collection, get_admins_collection, get_canal_data_collection
+# users_collection = get_users_collection()
+# admins_collection = get_admins_collection()
+# canal_data_collection = get_canal_data_collection()
 
 # Load CNN model
 cnn_model = tf.keras.models.load_model('c:/proj1/waste_cnn_model.h5')
