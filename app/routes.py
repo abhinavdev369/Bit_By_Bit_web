@@ -24,14 +24,14 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 logger = logging.getLogger(__name__)
 
 # Gmail configuration (replace with real credentials)
-GMAIL_EMAIL = "yourrealemail@gmail.com"
-GMAIL_PASSWORD = "yourapppassword"
+GMAIL_EMAIL = "abhinavdev34532@gmail.com"
+GMAIL_PASSWORD = "jwea jzvn dqxu fbgx"
 
-# MongoDB collections
-# from database import get_users_collection, get_admins_collection, get_canal_data_collection
-# users_collection = get_users_collection()
-# admins_collection = get_admins_collection()
-# canal_data_collection = get_canal_data_collection()
+
+from database import get_users_collection, get_admins_collection, get_canal_data_collection
+users_collection = get_users_collection()
+admins_collection = get_admins_collection()
+canal_data_collection = get_canal_data_collection()
 
 # Load CNN model
 cnn_model = tf.keras.models.load_model('c:/proj1/waste_cnn_model.h5')
